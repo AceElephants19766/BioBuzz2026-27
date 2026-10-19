@@ -1,16 +1,12 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import com.pedropathing.follower.Follower;
 import com.qualcomm.hardware.bosch.BNO055IMUNew;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.geometry.Vector2d;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.Utils;
 
@@ -28,7 +24,7 @@ public class Drivetrain extends SubsystemBase {
         return instance;
     }
 
-    private Drivetrain() {
+    public Drivetrain() {
         frontLeft = Utils.getInstance().hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = Utils.getInstance().hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = Utils.getInstance().hardwareMap.get(DcMotor.class, "backLeft");
