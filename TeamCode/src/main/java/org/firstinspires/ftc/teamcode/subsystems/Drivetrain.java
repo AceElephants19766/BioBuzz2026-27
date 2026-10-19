@@ -77,7 +77,7 @@ public class Drivetrain extends SubsystemBase {
         double zSpin = gamepad1.right_stick_x;
 
         Vector2d joystickVec = new Vector2d(x, y);
-        Vector2d fieldOrientedVec = joystickVec.rotateBy(getAngleYaw());
+        Vector2d fieldOrientedVec = joystickVec.rotateBy(Math.toRadians(getAngleYaw()));
 
         arcadeDrive(fieldOrientedVec.getX(), fieldOrientedVec.getY(), zSpin);
     }
