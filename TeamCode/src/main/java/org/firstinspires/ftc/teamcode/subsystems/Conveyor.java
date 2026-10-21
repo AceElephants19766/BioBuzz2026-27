@@ -7,11 +7,17 @@ import org.firstinspires.ftc.teamcode.Utils;
 
 public class Conveyor extends SubsystemBase {
 
+    private static Conveyor instance;
+
     private final DcMotor firstConveyorMotor;
     private final DcMotor secondConveyorMotor;
 
-    public Conveyor() {
+    public static Conveyor getInstance() {
+        if (instance == null) instance = new Conveyor();
+        return instance;
+    }
 
+    public Conveyor() {
         firstConveyorMotor = Utils.getInstance().hardwareMap.get(DcMotor.class, "firstConveyorMotor");
         secondConveyorMotor = Utils.getInstance().hardwareMap.get(DcMotor.class, "secondConveyorMotor");
     }
