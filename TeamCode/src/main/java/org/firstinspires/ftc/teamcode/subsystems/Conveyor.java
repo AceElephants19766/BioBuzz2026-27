@@ -12,6 +12,10 @@ public class Conveyor extends SubsystemBase {
     private final DcMotor firstConveyorMotor;
     private final DcMotor secondConveyorMotor;
 
+    public static final double INACTIVE_CONVEYOR_POWER = 0;
+    public static final double ACTIVE_CONVEYOR_POWER = 1;
+    public static final double CONVEYOR_REVERSE_POWER = -1;
+
     public static Conveyor getInstance() {
         if (instance == null) instance = new Conveyor();
         return instance;

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -16,13 +17,13 @@ public class Utils {
 
     public HardwareMap hardwareMap;
     public Telemetry telemetry;
-    public Gamepad gamepad1, gamepad2;
+    public GamepadEx gamepadEx1, gamepadEx2;
 
     public void init(HardwareMap hardwareMap, Telemetry telemetry, Gamepad gamepad1, Gamepad gamepad2) {
         this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
-        this.gamepad1 = gamepad1;
-        this.gamepad2 = gamepad2;
+        this.gamepadEx1 = new GamepadEx(gamepad1);
+        this.gamepadEx2 = new GamepadEx(gamepad2);
     }
 
 

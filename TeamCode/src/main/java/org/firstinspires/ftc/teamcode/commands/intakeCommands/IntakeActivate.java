@@ -1,12 +1,11 @@
 package org.firstinspires.ftc.teamcode.commands.intakeCommands;
 
-import com.seattlesolvers.solverslib.command.CommandBase;
+import com.seattlesolvers.solverslib.command.InstantCommand;
+import org.firstinspires.ftc.teamcode.subsystems.intake.IntakeRoller;
 
-import org.firstinspires.ftc.teamcode.subsystems.Intake;
-
-public class IntakeActivate extends CommandBase {
-
+public class IntakeActivate extends InstantCommand {
     public IntakeActivate() {
-        Intake.getInstance().setPower(1);
+        super(() -> IntakeRoller.getInstance().setPower(IntakeRoller.ACTIVE_ROLLER_POWER), IntakeRoller.getInstance());
     }
 }
+

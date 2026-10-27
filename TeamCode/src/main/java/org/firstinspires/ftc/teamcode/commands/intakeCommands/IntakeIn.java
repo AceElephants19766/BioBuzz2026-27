@@ -1,11 +1,10 @@
 package org.firstinspires.ftc.teamcode.commands.intakeCommands;
 
-import com.seattlesolvers.solverslib.command.CommandBase;
+import com.seattlesolvers.solverslib.command.InstantCommand;
+import org.firstinspires.ftc.teamcode.subsystems.intake.IntakeLifter;
 
-import org.firstinspires.ftc.teamcode.subsystems.Intake;
-
-public class IntakeIn extends CommandBase {
+public class IntakeIn extends InstantCommand {
     public IntakeIn() {
-        Intake.getInstance().setPosition(0);
+        super(() -> IntakeLifter.getInstance().setPosition(IntakeLifter.NOT_IN_POSITION), IntakeLifter.getInstance());
     }
 }
