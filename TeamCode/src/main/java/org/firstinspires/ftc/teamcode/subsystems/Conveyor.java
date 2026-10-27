@@ -10,7 +10,7 @@ public class Conveyor extends SubsystemBase {
     private static Conveyor instance;
 
     private final DcMotor firstConveyorMotor;
-    private final DcMotor secondConveyorMotor;
+   // private final DcMotor secondConveyorMotor;
 
     public static final double INACTIVE_CONVEYOR_POWER = 0;
     public static final double ACTIVE_CONVEYOR_POWER = 1;
@@ -23,11 +23,11 @@ public class Conveyor extends SubsystemBase {
 
     public Conveyor() {
         firstConveyorMotor = Utils.getInstance().hardwareMap.get(DcMotor.class, "firstConveyorMotor");
-        secondConveyorMotor = Utils.getInstance().hardwareMap.get(DcMotor.class, "secondConveyorMotor");
+      //  secondConveyorMotor = Utils.getInstance().hardwareMap.get(DcMotor.class, "secondConveyorMotor");
     }
 
     public void setPower(double power) {
         firstConveyorMotor.setPower(power);
-        secondConveyorMotor.setPower(power);
+       // secondConveyorMotor.setPower(power);
     }
 }
