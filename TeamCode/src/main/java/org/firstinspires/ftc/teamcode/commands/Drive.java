@@ -13,7 +13,7 @@ public class Drive extends CommandBase {
 
     @Override
     public void execute() {
-        Drivetrain.getInstance().fieldOrientedDrive(Utils.getInstance().gamepad1);
+        Drivetrain.getInstance().fieldOrientedDrive(Utils.getInstance().gamepadEx1.gamepad);
     }
 }
 

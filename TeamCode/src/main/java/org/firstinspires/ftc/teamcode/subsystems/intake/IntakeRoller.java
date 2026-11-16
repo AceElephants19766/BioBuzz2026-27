@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.subsystems.intake;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
+
+import org.firstinspires.ftc.teamcode.Constantino;
 import org.firstinspires.ftc.teamcode.Utils;
 
 public class IntakeRoller extends SubsystemBase {
@@ -10,7 +12,7 @@ public class IntakeRoller extends SubsystemBase {
 
     private final DcMotor intakeMotor;
 
-    public static final double ACTIVE_ROLLER_POWER = 0.3;
+    public static final double ACTIVE_ROLLER_POWER = 1;
     public static final double INACTIVE_ROLLER_POWER = 0;
     public static final double REVERSE_POWER = -0.3;
 
@@ -21,7 +23,7 @@ public class IntakeRoller extends SubsystemBase {
 
     public IntakeRoller() {
 
-        intakeMotor = Utils.getInstance().hardwareMap.get(DcMotor.class, "intakeMotor");
+        intakeMotor = Utils.getInstance().hardwareMap.get(DcMotor.class, Constantino.INTAKE_MOTOR);
     }
 
     public void setPower(double power) {

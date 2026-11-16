@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
+import org.firstinspires.ftc.teamcode.Constantino;
 import org.firstinspires.ftc.teamcode.Utils;
 
 public class Conveyor extends SubsystemBase {
@@ -22,7 +23,7 @@ public class Conveyor extends SubsystemBase {
     }
 
     public Conveyor() {
-        firstConveyorMotor = Utils.getInstance().hardwareMap.get(DcMotor.class, "firstConveyorMotor");
+        firstConveyorMotor = Utils.getInstance().hardwareMap.get(DcMotor.class, Constantino.FIRST_CONVEYOR_MOTOR);
       //  secondConveyorMotor = Utils.getInstance().hardwareMap.get(DcMotor.class, "secondConveyorMotor");
     }
 
