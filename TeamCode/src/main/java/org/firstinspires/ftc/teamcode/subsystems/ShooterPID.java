@@ -15,7 +15,7 @@ public class ShooterPID extends SubsystemBase {
 
     public static double kP = 0.2;
     public static double kI = 0;
-    public static double kD = 0.0005;
+    public static double kD = 0.0000;
     private double kF = 0.05;
 
     private final double TICKS_PER_REVOLUTION = 28;

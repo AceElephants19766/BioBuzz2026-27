@@ -69,7 +69,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void fieldOrientedDrive(Gamepad gamepad1) {
-        double x = gamepad1.left_stick_x;
+        double x = -gamepad1.left_stick_x;
         double y = -gamepad1.left_stick_y;
         double zSpin = gamepad1.right_stick_x;
 
