@@ -8,13 +8,19 @@ import com.pedropathing.math.Matrix;
 import com.pedropathing.math.Vector2D;
 import com.pedropathing.revhub.drivetrains.Mecanum;
 import com.pedropathing.revhub.drivetrains.MecanumConfig;
+import com.pedropathing.revhub.localizers.Encoder;
 import com.pedropathing.revhub.localizers.PinpointConfig;
 import com.pedropathing.revhub.localizers.PinpointLocalizer;
+import com.pedropathing.revhub.localizers.RevHubIMU;
+import com.pedropathing.revhub.localizers.TwoWheelConfig;
+import com.pedropathing.revhub.localizers.TwoWheelLocalizer;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.Constantino;
 
 /**
  * Pedro Pathing 3.0 constants. The values below are placeholders: run the AutoTune procedures in
@@ -23,61 +29,63 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  */
 public class Constants {
     public static MecanumConfig drivetrainConfig = new MecanumConfig(c -> {
-        c.frontLeftName.set("lf");
-        c.backLeftName.set("lr");
-        c.frontRightName.set("rf");
-        c.backRightName.set("rr");
-
-        c.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+        c.frontLeftName.set(Constantino.FRONT_LEFT);
+        c.frontRightName.set(Constantino.FRONT_RIGHT);
+        c.backLeftName.set(Constantino.BACK_LEFT);
+        c.backRightName.set(Constantino.BACK_RIGHT);
+        c.frontLeftDirection.set(DcMotorSimple.Direction.FORWARD);
+        c.frontRightDirection.set(DcMotorSimple.Direction.REVERSE);
         c.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
-        c.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
         c.backRightDirection.set(DcMotorSimple.Direction.FORWARD);
-
-        c.powerThreshold.set(0.01);
-        c.manualBrakeMode.set(false);
     });
 
-    public static PinpointConfig localizerConfig = new PinpointConfig(c -> {
-        c.name.set("pinpoint");
-        c.xPodOffset.set(-5.0);
-        c.yPodOffset.set(0.5);
-        c.offsetUnits.set(DistanceUnit.INCH);
-        c.globalDistanceUnit.set(DistanceUnit.INCH);
-        c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
-        c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.REVERSED);
-        c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+    public static TwoWheelConfig localizerConfig = new TwoWheelConfig(c -> {
+        c.xPodName.set(Constantino.BACK_RIGHT);
+        c.yPodName.set(Constantino.FRONT_LEFT);
+        c.imuName.set("imu");
+        c.xPodOffset.set(-138.99417459341325);
+        c.yPodOffset.set(21.48843839525992);
+        c.forwardTicksToInches.set(0.008215938461258074);
+        c.strafeTicksToInches.set(0.008215938461258074);
+        c.xPodDirection.set(Encoder.REVERSE);
+        c.yPodDirection.set(Encoder.FORWARD);
+        c.imu.set(new RevHubIMU(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
+                RevHubOrientationOnRobot.UsbFacingDirection.UP
+        )));
     });
 
-    public static ForesightConfig foresightConfig = new ForesightConfig(c -> {
-        // The end constraints (timeoutConstraint etc.) that decide when FollowPathCommand and HoldPointCommand finish
-        // also go here, see https://pedropathing.com/docs/pathing/reference/endconstraints
 
-        Controller primaryTranslationalForward = Controller.proportional(0.3);
-        Controller secondaryTranslationalForward = Controller.proportional(0.1);
-        Controller primaryTranslationalLateral = Controller.proportional(0.3);
-        Controller secondaryTranslationalLateral = Controller.proportional(0.1);
+    public static ForesightConfig foresightConfig = new ForesightConfig(
+            c -> {
+                Controller primaryTranslationalForward = Controller.proportional(0.13919415293058152);
+                Controller secondaryTranslationalForward = Controller.proportional(0.05142852017158357);
+                Controller primaryTranslationalLateral = Controller.proportional(0.07421384085344859);
+                Controller secondaryTranslationalLateral = Controller.proportional(0.027420031164999657);
 
-        c.forwardTranslational.set(Controller.piecewise(secondaryTranslationalForward).put(2.5, primaryTranslationalForward));
-        c.strafeTranslational.set(Controller.piecewise(secondaryTranslationalLateral).put(2.5, primaryTranslationalLateral));
+                c.forwardTranslational.set(Controller.piecewise(secondaryTranslationalForward).put(2.5, primaryTranslationalForward));
+                c.strafeTranslational.set(Controller.piecewise(secondaryTranslationalLateral).put(2.5, primaryTranslationalLateral));
 
-        c.coast.set(Controller.proportionalFeedforward(0.010978350889324107));
-        c.brake.set(Controller.proportionalFeedforward(0.008731598255925491));
+                c.coast.set(Controller.proportionalFeedforward(0.0033952063977147917));
+                c.brake.set(Controller.proportionalFeedforward(0.002885925438057573));
 
-        c.headingFeedback.set(Controller.proportional(5.258721785960744));
-        c.headingBrakeCoefficients.set(Vector2D.cartesian(0.05642143125655298, 0.0063829525363003695));
+                c.headingFeedback.set(Controller.proportional(2.6999681974531025));
+                c.headingBrakeCoefficients.set(Vector2D.cartesian(0.0488764158468133, -4.420759091318805E-4));
 
-        c.linearBrakeCoefficients.set(Matrix.diag(0.10605894992901523, 0.08719146175596092));
-        c.quadraticBrakeCoefficients.set(Matrix.diag(0.0014663966976606565, 0.0013837064502458813));
+                c.linearBrakeCoefficients.set(Matrix.diag(0.05894286792518784, 0.0519664317062747));
+                c.quadraticBrakeCoefficients.set(Matrix.diag(4.695689161177705E-4, 3.1066571713102785E-4));
 
-        c.maxAchievableForwardVelocity.set(72.72923108818539);
-        c.maxAchievableStrafeVelocity.set(52.34323936525474);
-        c.naturalForwardDeceleration.set(85.01144677379789);
-        c.naturalStrafeDeceleration.set(104.49787535782846);
-    });
+                c.maxAchievableForwardVelocity.set(200.0177381765418);
+                c.maxAchievableStrafeVelocity.set(196.39977974368475);
+                c.naturalForwardDeceleration.set(94.76547732814778);
+                c.naturalStrafeDeceleration.set(201.97264066970388);
+            }
+    );
+
 
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new Follower(
-                new PinpointLocalizer(hardwareMap, localizerConfig),
+                new TwoWheelLocalizer(hardwareMap, localizerConfig),
                 new Mecanum(hardwareMap, drivetrainConfig),
                 new Foresight(foresightConfig)
         );

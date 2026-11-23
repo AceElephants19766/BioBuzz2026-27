@@ -1,0 +1,42 @@
+package org.firstinspires.ftc.teamcode.commands;
+
+import com.seattlesolvers.solverslib.command.CommandBase;
+
+import org.firstinspires.ftc.teamcode.subsystems.ShooterPID;
+import java.lang.annotation.Target;
+
+public class ShooterGetToRPM extends CommandBase {
+
+    private final ShooterPID shooterPID;
+    private final double target;
+
+    public ShooterGetToRPM(ShooterPID shooterPID, int target) {
+        this.shooterPID = shooterPID;
+        this.target = target;
+        addRequirements(shooterPID);
+    }
+
+    @Override
+    public void initialize() {
+        shooterPID.pidController.setSetPoint(target);
+    }
+
+    @Override
+    public void execute() {
+        shooterPID.setPower(
+                shooterPID.pidController.calculate(
+                        shooterPID.getRPM()
+                )
+        );
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        shooterPID.setPower(0);
+    }
+}

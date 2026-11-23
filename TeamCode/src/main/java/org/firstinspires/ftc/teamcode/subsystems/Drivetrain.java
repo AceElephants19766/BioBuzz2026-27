@@ -1,17 +1,14 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import com.pedropathing.follower.Follower;
 import com.qualcomm.hardware.bosch.BNO055IMUNew;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.geometry.Vector2d;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.teamcode.Constantino;
 import org.firstinspires.ftc.teamcode.Utils;
 
 public class Drivetrain extends SubsystemBase {
@@ -28,18 +25,18 @@ public class Drivetrain extends SubsystemBase {
         return instance;
     }
 
-    private Drivetrain() {
-        frontLeft = Utils.getInstance().hardwareMap.get(DcMotor.class, "frontLeft");
-        frontRight = Utils.getInstance().hardwareMap.get(DcMotor.class, "frontRight");
-        backLeft = Utils.getInstance().hardwareMap.get(DcMotor.class, "backLeft");
-        backRight = Utils.getInstance().hardwareMap.get(DcMotor.class, "backRight");
+    public Drivetrain() {
+        frontLeft = Utils.getInstance().hardwareMap.get(DcMotor.class, Constantino.FRONT_LEFT);
+        frontRight = Utils.getInstance().hardwareMap.get(DcMotor.class, Constantino.FRONT_RIGHT);
+        backLeft = Utils.getInstance().hardwareMap.get(DcMotor.class, Constantino.BACK_LEFT);
+        backRight = Utils.getInstance().hardwareMap.get(DcMotor.class, Constantino.BACK_RIGHT);
 
         imu = Utils.getInstance().hardwareMap.get(BNO055IMUNew.class, "imu");
         imu.initialize(
                 new BNO055IMUNew.Parameters(
                         new RevHubOrientationOnRobot(
-                                RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
-                                RevHubOrientationOnRobot.UsbFacingDirection.DOWN
+                                RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
+                                RevHubOrientationOnRobot.UsbFacingDirection.UP
                         )
                 )
         );
@@ -53,9 +50,9 @@ public class Drivetrain extends SubsystemBase {
 
 
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontLeft.setDirection(DcMotorSimple.Direction.FORWARD);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
-        frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 
