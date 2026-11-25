@@ -1,16 +1,14 @@
 package org.firstinspires.ftc.teamcode.teleops;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 
 import org.firstinspires.ftc.teamcode.Constantino;
-import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @TeleOp
-public class LocalizationTest extends CommandOpMode {
+public class NIGGA extends CommandOpMode {
 
     DcMotorEx encoderX;
     DcMotorEx encoderY;
