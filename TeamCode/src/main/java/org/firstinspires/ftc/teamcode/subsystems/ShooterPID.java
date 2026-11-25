@@ -13,10 +13,11 @@ public class ShooterPID extends SubsystemBase {
     private final DcMotorEx shooter;
     public final PIDController pidController;
 
-    public static double kP = 0.2;
+    public static double kP = 0;
     public static double kI = 0;
     public static double kD = 0.0000;
-    private double kF = 0.05;
+    public static double kF = 0.00014;
+    public static double TARGET_RPM = 1500;
 
     private final double TICKS_PER_REVOLUTION = 28;
     private final double RATIO = 82. / 20.;
@@ -24,6 +25,7 @@ public class ShooterPID extends SubsystemBase {
 
     public ShooterPID(HardwareMap hardwareMap) {
         shooter = hardwareMap.get(DcMotorEx.class, "shooter");
+        shooter.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);    //new Lev
         pidController = new PIDController(kP, kI, kD);
     }
 
@@ -46,10 +48,14 @@ public class ShooterPID extends SubsystemBase {
                 "RPM",
                 getRPM()
         );
+
         FtcDashboard.getInstance().getTelemetry().addData(
                 "target",
                 pidController.getSetPoint()
         );
+
+        FtcDashboard.getInstance().getTelemetry().addData("version",7);
+        FtcDashboard.getInstance().getTelemetry().update();
     }
 }
 

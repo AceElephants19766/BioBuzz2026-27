@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.commands;
 import com.seattlesolvers.solverslib.command.CommandBase;
 
 import org.firstinspires.ftc.teamcode.subsystems.ShooterPID;
+import com.acmerobotics.dashboard.FtcDashboard;
 import java.lang.annotation.Target;
 
 public class ShooterGetToRPM extends CommandBase {
@@ -23,11 +24,13 @@ public class ShooterGetToRPM extends CommandBase {
 
     @Override
     public void execute() {
+        shooterPID.pidController.setP(ShooterPID.kP); //lev
+        shooterPID.pidController.setSetPoint(ShooterPID.TARGET_RPM); //lev changed
+        double feedforward = ShooterPID.kF * ShooterPID.TARGET_RPM;
+        double correction = shooterPID.pidController.calculate(shooterPID.getRPM());
         shooterPID.setPower(
-                shooterPID.pidController.calculate(
-                        shooterPID.getRPM()
-                )
-        );
+                feedforward + correction );
+        FtcDashboard.getInstance().getTelemetry().addData("power", feedforward + correction);
     }
 
     @Override

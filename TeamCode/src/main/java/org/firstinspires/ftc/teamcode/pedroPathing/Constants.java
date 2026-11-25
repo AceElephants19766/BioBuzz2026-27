@@ -43,12 +43,12 @@ public class Constants {
         c.xPodName.set(Constantino.BACK_RIGHT);
         c.yPodName.set(Constantino.FRONT_LEFT);
         c.imuName.set("imu");
-        c.xPodOffset.set(-138.99417459341325);
-        c.yPodOffset.set(21.48843839525992);
-        c.forwardTicksToInches.set(0.008215938461258074);
-        c.strafeTicksToInches.set(0.008215938461258074);
+        c.xPodOffset.set(-2.17);
+        c.yPodOffset.set(2.76);
+        c.forwardTicksToInches.set(1/505.253788);
+        c.strafeTicksToInches.set(1/505.253788);
         c.xPodDirection.set(Encoder.REVERSE);
-        c.yPodDirection.set(Encoder.FORWARD);
+        c.yPodDirection.set(Encoder.REVERSE);
         c.imu.set(new RevHubIMU(new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
                 RevHubOrientationOnRobot.UsbFacingDirection.UP

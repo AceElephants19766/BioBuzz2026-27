@@ -27,7 +27,7 @@ public class AceTeleOp extends UpgradedTeleop {
         shooterPID = new ShooterPID(hardwareMap);
 
         Utils.getInstance().gamepadEx1.getGamepadButton(GamepadKeys.Button.X).toggleWhenPressed(
-                new ShooterGetToRPM(shooterPID, -500)
+                new ShooterGetToRPM(shooterPID, 2000)
         );
         CommandScheduler.getInstance().setDefaultCommand(Drivetrain.getInstance(), new Drive());
 
